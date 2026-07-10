@@ -7,6 +7,7 @@ import { InvitationCard } from "@/components/invitation-card"
 import { WeddingSchedule } from "@/components/wedding-schedule"
 import { Countdown } from "@/components/countdown"
 import { MapSection } from "@/components/map-section"
+import { Rsvp } from "@/components/rsvp"
 import { Petals } from "@/components/petals"
 import { wedding } from "@/lib/wedding"
 
@@ -33,6 +34,7 @@ export function InvitationPage() {
             <InvitationCard />
             <WeddingSchedule />
             <Countdown />
+            <Rsvp />
             <MapSection />
 
             <footer className="border-t border-border bg-white py-8 text-center">

@@ -29,12 +29,7 @@ function parseScriptResponse(text: string): { success: boolean; error?: string }
 
   const successMatch = trimmed.match(/\{[\s\S]*?"success"\s*:\s*true[\s\S]*?\}/)
   if (successMatch) {
-    try {
-      const result = JSON.parse(successMatch[0]) as { success?: boolean }
-      if (result.success) return { success: true }
-    } catch {
-      return { success: true }
-    }
+    return { success: true }
   }
 
   const errorMatch = trimmed.match(/\{[\s\S]*?"success"\s*:\s*false[\s\S]*?\}/)
@@ -47,67 +42,38 @@ function parseScriptResponse(text: string): { success: boolean; error?: string }
     }
   }
 
-  if (
-    trimmed.includes("accounts.google.com") ||
-    trimmed.toLowerCase().includes("sign in")
-  ) {
+  if (trimmed.includes("Sayfa Bulunamadı") || trimmed.includes("404")) {
     return {
       success: false,
-      error:
-        "Apps Script erişimi 'Herkes' olmalı. Dağıtım ayarlarını kontrol edin.",
+      error: "Webhook URL geçersiz veya dağıtım süresi dolmuş. Yeni sürüm dağıtın.",
     }
   }
 
   return {
     success: false,
-    error:
-      "Webhook yanıtı okunamadı. Apps Script'i tablodan oluşturup yeniden dağıtın.",
+    error: "Webhook yanıtı okunamadı. Apps Script'i yeniden dağıtın.",
   }
 }
 
-async function readScriptResponse(response: Response): Promise<string> {
-  if (response.status === 301 || response.status === 302 || response.status === 303) {
-    const location = response.headers.get("location")
-    if (!location) return ""
-    const followUp = await fetch(location, { method: "GET", cache: "no-store" })
-    return followUp.text()
-  }
+async function fetchScript(url: string): Promise<string> {
+  const response = await fetch(url, {
+    method: "GET",
+    redirect: "follow",
+    cache: "no-store",
+  })
   return response.text()
 }
 
-async function postToGoogleScript(
-  url: string,
+async function submitViaGet(
+  baseUrl: string,
   payload: Record<string, string>,
 ): Promise<{ success: boolean; error?: string }> {
-  const body = new URLSearchParams(payload)
-
-  // form-urlencoded — Google Apps Script ile en güvenilir yöntem
-  const response = await fetch(url, {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: body.toString(),
-    redirect: "manual",
-    cache: "no-store",
+  const url = new URL(baseUrl)
+  Object.entries(payload).forEach(([key, value]) => {
+    url.searchParams.set(key, value)
   })
 
-  let text = await readScriptResponse(response)
-
-  // redirect manual başarısızsa follow ile dene
-  if (!text.trim() && response.status === 200) {
-    text = await response.text()
-  }
-
-  if (!text.trim()) {
-    const fallback = await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: body.toString(),
-      redirect: "follow",
-      cache: "no-store",
-    })
-    text = await fallback.text()
-  }
-
+  const text = await fetchScript(url.toString())
   return parseScriptResponse(text)
 }
 
@@ -148,7 +114,7 @@ export async function submitRsvp(
   }
 
   try {
-    return await postToGoogleScript(webhookUrl, payload)
+    return await submitViaGet(webhookUrl, payload)
   } catch {
     return {
       success: false,

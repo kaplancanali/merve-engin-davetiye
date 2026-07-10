@@ -68,13 +68,6 @@ export function InvitationCard() {
               </div>
             </div>
 
-            {/* Event badge */}
-            <div className="mt-12 flex justify-center sm:mt-14">
-              <span className="rounded-full border border-border bg-cream px-8 py-2.5 font-serif text-sm tracking-[0.4em] text-foreground">
-                {wedding.event}
-              </span>
-            </div>
-
             {/* Info grid */}
             <div className="mt-10 grid gap-4 sm:mt-12 sm:grid-cols-2 sm:gap-6">
               <div className="card-soft rounded-md border border-border bg-cream/50 p-6 text-center sm:p-8">

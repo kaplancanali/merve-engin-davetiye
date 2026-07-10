@@ -48,8 +48,6 @@ export function InvitationPage() {
               <p className="mt-6 font-script text-4xl text-foreground sm:text-5xl">
                 {wedding.bride} & {wedding.groom}
               </p>
-              <p className="mt-3 font-serif text-base text-muted">{wedding.date}</p>
-              <p className="mt-2 font-serif text-sm text-muted">{wedding.venue}</p>
               <div className="mx-auto mt-8 h-px w-24 gold-line" />
               <p className="mt-6 font-serif text-xs tracking-[0.3em] text-muted">
                 SEVGİYLE

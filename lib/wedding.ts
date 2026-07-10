@@ -18,38 +18,38 @@ export const wedding = {
     {
       time: '19:00',
       title: 'Misafir Karşılama',
-      description: 'Salon girişinde karşılama.',
-      location: 'Salon Girişi',
+      description:
+        'Bu özel gecemize teşrif eden kıymetli misafirlerimizi aile büyüklerimizin ev sahipliğinde karşılayacağız.',
     },
     {
       time: '20:00',
-      title: 'Nikah Töreni',
-      description: 'Resmi nikah töreni.',
-      location: 'Nikah Masası',
+      title: 'Nikâh Töreni',
+      description:
+        'Bir ömre “evet” demek istediğimiz nikâh törenimizi, sizlerin huzurunda gerçekleştireceğiz.',
     },
     {
       time: '20:30',
-      title: 'İkram Dağıtımı',
-      description: 'Yemek ve ikram servisi.',
-      location: 'Ana Salon',
+      title: 'İkram',
+      description:
+        'Bu anlamlı gecenin zarafetini ikramlarımız eşliğinde birlikte paylaşacağız.',
     },
     {
       time: '21:00',
-      title: 'Gelin ve Damadın Masaları Ziyareti',
-      description: 'Masa ziyaretleri.',
-      location: 'Ana Salon',
+      title: 'Gelin & Damat Ziyaretleri',
+      description:
+        'Sizlerle masalarınızda buluşacak, kutlamanızı tek tek kabul edeceğiz.',
     },
     {
-      time: '22:00',
-      title: 'Pasta Kesimi',
-      description: 'Pasta kesimi ve kutlama.',
-      location: 'Ana Salon',
+      time: '21:30',
+      title: 'Pasta Seremonisi',
+      description:
+        'Düğün pastamızın ikramı ile gecemizin en tatlı anlarından birini birlikte yaşayacağız.',
     },
     {
-      time: '23:00',
-      title: 'Kapanış ve Uğurlama',
-      description: 'Gece sonu ve uğurlama.',
-      location: 'Salon Çıkışı',
+      time: '23:30',
+      title: 'Veda',
+      description:
+        'Bu unutulmaz gecemizi varlığınızla onurlandırdığınız için teşekkür edecek, en içten sevgi ve saygılarımızla sizleri uğurlayacağız.',
     },
   ],
 } as const

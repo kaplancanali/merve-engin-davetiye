@@ -5,7 +5,6 @@ import {
   Clock,
   DoorOpen,
   Heart,
-  MapPin,
   Sparkles,
   Users,
   type LucideIcon,
@@ -62,11 +61,6 @@ export function WeddingSchedule() {
                   <p className="mt-3 font-serif text-sm leading-relaxed text-muted sm:text-base">
                     {item.description}
                   </p>
-
-                  <div className="mt-4 flex items-center gap-1.5 text-xs text-accent sm:text-sm">
-                    <MapPin className="h-3.5 w-3.5 shrink-0" />
-                    <span className="font-serif">{item.location}</span>
-                  </div>
                 </div>
               </div>
             </Reveal>

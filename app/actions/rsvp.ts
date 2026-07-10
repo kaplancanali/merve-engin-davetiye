@@ -8,15 +8,67 @@ export type SubmitRsvpInput = {
   message?: string
 }
 
-export async function submitRsvp(input: SubmitRsvpInput) {
-  const name = input.name.trim()
-  if (!name) {
-    throw new Error("Lütfen adınızı ve soyadınızı girin.")
+export type SubmitRsvpResult = {
+  success: boolean
+  error?: string
+}
+
+async function postToGoogleScript(
+  url: string,
+  payload: Record<string, unknown>,
+): Promise<{ success: boolean; error?: string }> {
+  const response = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+    redirect: "manual",
+    cache: "no-store",
+  })
+
+  let text: string
+
+  // Google Apps Script web uygulamaları 302 redirect döner
+  if (response.status === 301 || response.status === 302 || response.status === 303) {
+    const location = response.headers.get("location")
+    if (!location) {
+      return { success: false, error: "Webhook yanıtı geçersiz (redirect)." }
+    }
+    const followUp = await fetch(location, { method: "GET", cache: "no-store" })
+    text = await followUp.text()
+  } else {
+    text = await response.text()
   }
 
-  const webhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL
+  try {
+    const result = JSON.parse(text) as { success?: boolean; error?: string }
+    if (result.success) return { success: true }
+    return { success: false, error: result.error || "Kayıt gönderilemedi." }
+  } catch {
+    // Bazen JSON dışı gövde dönebilir; kayıt yine de yazılmış olabilir
+    if (text.includes('"success":true') || text.includes('"success": true')) {
+      return { success: true }
+    }
+    return {
+      success: false,
+      error: "Webhook yanıtı okunamadı. URL ve Apps Script dağıtımını kontrol edin.",
+    }
+  }
+}
+
+export async function submitRsvp(
+  input: SubmitRsvpInput,
+): Promise<SubmitRsvpResult> {
+  const name = input.name.trim()
+  if (!name) {
+    return { success: false, error: "Lütfen adınızı ve soyadınızı girin." }
+  }
+
+  const webhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL?.trim()
   if (!webhookUrl) {
-    throw new Error("Katılım formu henüz yapılandırılmamış.")
+    return {
+      success: false,
+      error: "Katılım formu henüz yapılandırılmamış. (GOOGLE_SHEETS_WEBHOOK_URL)",
+    }
   }
 
   const guestCount = input.attendance === "yes" ? (input.guestCount ?? 1) : 0
@@ -32,18 +84,12 @@ export async function submitRsvp(input: SubmitRsvpInput) {
     submittedAt: new Date().toISOString(),
   }
 
-  const response = await fetch(webhookUrl, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-  })
-
-  if (!response.ok) {
-    throw new Error("Kayıt gönderilemedi.")
-  }
-
-  const result = (await response.json()) as { success?: boolean; error?: string }
-  if (!result.success) {
-    throw new Error(result.error || "Kayıt gönderilemedi.")
+  try {
+    return await postToGoogleScript(webhookUrl, payload)
+  } catch {
+    return {
+      success: false,
+      error: "Bağlantı hatası. Webhook URL'sini kontrol edin.",
+    }
   }
 }

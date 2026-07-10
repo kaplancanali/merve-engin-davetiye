@@ -31,14 +31,18 @@ export function Rsvp() {
     setError("")
     startTransition(async () => {
       try {
-        await submitRsvp({
+        const result = await submitRsvp({
           name,
           phone,
           attendance,
           guestCount: attendance === "yes" ? guests : undefined,
           message,
         })
-        setSubmitted(true)
+        if (result.success) {
+          setSubmitted(true)
+        } else {
+          setError(result.error || "Gönderilirken bir hata oluştu. Lütfen tekrar deneyin.")
+        }
       } catch {
         setError("Gönderilirken bir hata oluştu. Lütfen tekrar deneyin.")
       }

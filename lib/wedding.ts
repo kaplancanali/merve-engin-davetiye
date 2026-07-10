@@ -18,43 +18,37 @@ export const wedding = {
     {
       time: '19:00',
       title: 'Misafir Karşılama',
-      description:
-        'Salon girişinde karşılama. Misafirlerimizi ağırlıyor, yerlerine yönlendiriyoruz. Hoş geldin ikramları servis edilir.',
+      description: 'Salon girişinde karşılama.',
       location: 'Salon Girişi',
     },
     {
       time: '20:00',
       title: 'Nikah Töreni',
-      description:
-        'Resmi nikah töreni gerçekleştirilir. Nikah şahitleri ve yakın ailemiz törene katılır. Yüzük takma ve imza töreni.',
+      description: 'Resmi nikah töreni.',
       location: 'Nikah Masası',
     },
     {
       time: '20:30',
       title: 'İkram Dağıtımı',
-      description:
-        'Sıcak ve soğuk ikramların dağıtımı başlar. Açık büfe servisi ile yemek ikramı yapılır.',
+      description: 'Yemek ve ikram servisi.',
       location: 'Ana Salon',
     },
     {
       time: '21:00',
       title: 'Gelin ve Damadın Masaları Ziyareti',
-      description:
-        'Gelin ve damat tüm misafir masalarını tek tek ziyaret eder. Fotoğraf çekimleri ve sohbetler gerçekleşir.',
-      location: 'Tüm Masalar',
+      description: 'Masa ziyaretleri.',
+      location: 'Ana Salon',
     },
     {
       time: '22:00',
       title: 'Pasta Kesimi',
-      description:
-        'Düğün pastasının kesimi ve kutlama anı. Pasta servisi misafirlerimize ikram edilir.',
+      description: 'Pasta kesimi ve kutlama.',
       location: 'Ana Salon',
     },
     {
       time: '23:00',
       title: 'Kapanış ve Uğurlama',
-      description:
-        'Gece sona erer. Katılımınız ve güzel dilekleriniz için teşekkür ederiz. Misafirlerimizi uğurluyoruz.',
+      description: 'Gece sonu ve uğurlama.',
       location: 'Salon Çıkışı',
     },
   ],

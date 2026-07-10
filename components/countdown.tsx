@@ -20,8 +20,8 @@ function getTimeLeft(target: number): TimeLeft {
 function Unit({ value, label }: { value: number; label: string }) {
   const display = String(value).padStart(2, "0")
   return (
-    <div className="flex min-w-[72px] flex-col items-center rounded-sm border border-border bg-white px-4 py-5 sm:min-w-[100px] sm:px-6 sm:py-7">
-      <div className="relative h-12 overflow-hidden sm:h-14">
+    <div className="card-soft flex min-w-[80px] flex-1 flex-col items-center rounded-md border border-border bg-white px-4 py-6 sm:min-w-[110px] sm:px-8 sm:py-9">
+      <div className="relative h-14 overflow-hidden sm:h-16">
         <AnimatePresence mode="popLayout" initial={false}>
           <motion.span
             key={display}
@@ -29,13 +29,13 @@ function Unit({ value, label }: { value: number; label: string }) {
             animate={{ y: "0%", opacity: 1 }}
             exit={{ y: "-100%", opacity: 0 }}
             transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-            className="block font-serif text-4xl font-medium tabular-nums text-foreground sm:text-5xl"
+            className="block font-serif text-5xl font-medium tabular-nums text-foreground sm:text-6xl"
           >
             {display}
           </motion.span>
         </AnimatePresence>
       </div>
-      <span className="mt-2 text-[10px] uppercase tracking-[0.3em] text-muted sm:text-xs">
+      <span className="mt-3 text-[10px] uppercase tracking-[0.35em] text-muted sm:text-xs">
         {label}
       </span>
     </div>
@@ -53,22 +53,27 @@ export function Countdown() {
   }, [target])
 
   return (
-    <section className="relative px-6 py-20">
-      <SectionTitle eyebrow="Geri Sayım" title="Mutluluğumuza Kalan" />
-      <Reveal>
-        <div className="mx-auto flex max-w-2xl flex-wrap items-center justify-center gap-3 sm:gap-5">
-          {time ? (
-            <>
-              <Unit value={time.days} label="Gün" />
-              <Unit value={time.hours} label="Saat" />
-              <Unit value={time.minutes} label="Dakika" />
-              <Unit value={time.seconds} label="Saniye" />
-            </>
-          ) : (
-            <div className="h-32" />
-          )}
-        </div>
-      </Reveal>
+    <section id="geri-sayim" className="section-surface relative px-4 py-24 sm:px-8 sm:py-28">
+      <div className="mx-auto max-w-5xl">
+        <SectionTitle eyebrow="Geri Sayım" title="Mutluluğumuza Kalan" />
+        <p className="mx-auto -mt-4 mb-12 max-w-xl text-center font-serif text-base text-muted sm:text-lg">
+          {wedding.date} · Saat {wedding.time}
+        </p>
+        <Reveal>
+          <div className="mx-auto flex max-w-3xl gap-3 sm:gap-5">
+            {time ? (
+              <>
+                <Unit value={time.days} label="Gün" />
+                <Unit value={time.hours} label="Saat" />
+                <Unit value={time.minutes} label="Dakika" />
+                <Unit value={time.seconds} label="Saniye" />
+              </>
+            ) : (
+              <div className="h-36 w-full" />
+            )}
+          </div>
+        </Reveal>
+      </div>
     </section>
   )
 }

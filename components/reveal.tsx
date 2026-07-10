@@ -30,21 +30,28 @@ export function Reveal({
 export function SectionTitle({
   eyebrow,
   title,
+  subtitle,
 }: {
   eyebrow?: string
   title: string
+  subtitle?: string
 }) {
   return (
-    <div className="mb-10 text-center">
+    <div className="mb-12 text-center sm:mb-14">
       {eyebrow && (
-        <p className="mb-3 text-xs uppercase tracking-[0.4em] text-accent">
+        <p className="mb-3 text-xs uppercase tracking-[0.45em] text-accent">
           {eyebrow}
         </p>
       )}
-      <h2 className="font-serif text-3xl font-medium text-foreground sm:text-4xl text-balance">
+      <h2 className="font-serif text-4xl font-medium text-foreground sm:text-5xl text-balance">
         {title}
       </h2>
-      <div className="mx-auto mt-5 h-px w-24 gold-line" />
+      {subtitle && (
+        <p className="mx-auto mt-4 max-w-xl font-serif text-base text-muted sm:text-lg">
+          {subtitle}
+        </p>
+      )}
+      <div className="mx-auto mt-6 h-px w-32 gold-line" />
     </div>
   )
 }

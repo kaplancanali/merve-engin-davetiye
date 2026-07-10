@@ -11,53 +11,63 @@ export function MapSection() {
   const open = `https://www.google.com/maps/search/?api=1&query=${q}`
 
   return (
-    <section className="relative bg-cream-dark px-6 py-20 pb-28">
-      <SectionTitle eyebrow="Konum" title="Düğün Adresi" />
-      <Reveal className="mx-auto max-w-3xl">
-        <div className="overflow-hidden rounded-sm border border-border bg-white shadow-sm">
-          <div className="relative aspect-[16/10] w-full">
-            <iframe
-              title="Düğün mekanı haritası"
-              src={embed}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className="absolute inset-0 h-full w-full"
-            />
-          </div>
-          <div className="flex flex-col gap-4 p-6 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex items-start gap-3">
-              <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
-              <div>
-                <p className="font-serif text-lg text-foreground">
-                  {wedding.map.label}
-                </p>
-                <p className="text-sm text-muted">{wedding.map.city}</p>
-                <p className="mt-1 text-sm text-muted">{wedding.address}</p>
+    <section id="konum" className="section-muted relative px-4 py-24 sm:px-8 sm:py-28">
+      <div className="mx-auto max-w-5xl">
+        <SectionTitle
+          eyebrow="Konum"
+          title="Düğün Adresi"
+          subtitle="Sizleri aramızda görmekten mutluluk duyarız."
+        />
+        <Reveal>
+          <div className="card-soft overflow-hidden rounded-md border border-border bg-white">
+            <div className="relative aspect-[16/9] w-full sm:aspect-[21/9]">
+              <iframe
+                title="Düğün mekanı haritası"
+                src={embed}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="absolute inset-0 h-full w-full"
+              />
+            </div>
+            <div className="grid gap-6 p-6 sm:grid-cols-[1fr_auto] sm:items-center sm:p-10">
+              <div className="flex items-start gap-4">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-accent/30 bg-cream">
+                  <MapPin className="h-5 w-5 text-accent" />
+                </div>
+                <div>
+                  <p className="font-serif text-xl text-foreground sm:text-2xl">
+                    {wedding.map.label}
+                  </p>
+                  <p className="mt-1 font-serif text-base text-muted">{wedding.map.city}</p>
+                  <p className="mt-2 font-serif text-base leading-relaxed text-muted">
+                    {wedding.address}
+                  </p>
+                </div>
+              </div>
+              <div className="flex flex-wrap gap-3">
+                <a
+                  href={directions}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full bg-foreground px-6 py-3 font-serif text-sm text-cream transition-opacity hover:opacity-90"
+                >
+                  <Navigation className="h-4 w-4" />
+                  Yol Tarifi Al
+                </a>
+                <a
+                  href={open}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 font-serif text-sm text-foreground transition-colors hover:bg-cream"
+                >
+                  <ExternalLink className="h-4 w-4" />
+                  Haritada Aç
+                </a>
               </div>
             </div>
-            <div className="flex flex-wrap gap-3">
-              <a
-                href={directions}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-sm bg-foreground px-5 py-2.5 text-sm text-cream transition-opacity hover:opacity-90"
-              >
-                <Navigation className="h-4 w-4" />
-                Yol Tarifi Al
-              </a>
-              <a
-                href={open}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-sm border border-border px-5 py-2.5 text-sm text-foreground transition-colors hover:bg-cream-dark"
-              >
-                <ExternalLink className="h-4 w-4" />
-                Haritada Aç
-              </a>
-            </div>
           </div>
-        </div>
-      </Reveal>
+        </Reveal>
+      </div>
     </section>
   )
 }

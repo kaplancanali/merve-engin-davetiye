@@ -50,13 +50,18 @@ export function Rsvp() {
   }
 
   const fieldClass =
-    "w-full rounded-sm border border-border bg-white px-4 py-3 font-serif text-foreground placeholder:text-muted outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/20"
+    "w-full rounded-md border border-border bg-cream/30 px-4 py-3.5 font-serif text-foreground placeholder:text-muted outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/20"
 
   return (
-    <section id="katilim" className="relative px-6 py-20">
-      <SectionTitle eyebrow="Lütfen Bildirin" title="Katılım Formu" />
-      <Reveal className="mx-auto max-w-xl">
-        <div className="rounded-sm border border-border bg-white p-6 shadow-sm sm:p-10">
+    <section id="katilim" className="section-surface relative px-4 py-24 sm:px-8 sm:py-28">
+      <div className="mx-auto max-w-5xl">
+        <SectionTitle
+          eyebrow="Lütfen Bildirin"
+          title="Katılım Formu"
+          subtitle="Katılım durumunuzu bizimle paylaşmanızı rica ederiz."
+        />
+        <Reveal className="mx-auto max-w-2xl">
+          <div className="card-soft rounded-md border border-border bg-white p-6 sm:p-12">
           <AnimatePresence mode="wait">
             {submitted ? (
               <motion.div
@@ -206,15 +211,16 @@ export function Rsvp() {
                 <button
                   type="submit"
                   disabled={isPending}
-                  className="mt-2 inline-flex items-center justify-center gap-2 rounded-sm bg-foreground px-6 py-3.5 font-serif text-sm uppercase tracking-[0.2em] text-cream transition-opacity hover:opacity-90 disabled:opacity-60"
+                  className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full bg-foreground px-6 py-4 font-serif text-sm uppercase tracking-[0.2em] text-cream transition-opacity hover:opacity-90 disabled:opacity-60 sm:w-auto"
                 >
                   {isPending ? "Gönderiliyor..." : "Gönder"}
                 </button>
               </motion.form>
             )}
           </AnimatePresence>
-        </div>
-      </Reveal>
+          </div>
+        </Reveal>
+      </div>
     </section>
   )
 }

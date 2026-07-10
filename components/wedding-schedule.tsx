@@ -23,49 +23,44 @@ const icons: LucideIcon[] = [
 
 export function WeddingSchedule() {
   return (
-    <section id="dugun-akisi" className="relative bg-cream-dark px-6 py-20">
-      <SectionTitle eyebrow="Program" title="Düğün Akışı" />
-      <p className="mx-auto -mt-6 mb-12 max-w-lg text-center font-serif text-sm text-muted sm:text-base">
-        08 Ağustos 2026 Cumartesi akşamı programımız aşağıdaki gibidir.
-      </p>
+    <section id="dugun-akisi" className="section-muted relative px-4 py-24 sm:px-8 sm:py-28">
+      <div className="mx-auto max-w-5xl">
+        <SectionTitle eyebrow="Program" title="Düğün Akışı" />
+        <p className="mx-auto -mt-4 mb-14 max-w-2xl text-center font-serif text-base leading-relaxed text-muted sm:text-lg">
+          08 Ağustos 2026 Cumartesi akşamı, bu özel günümüzü sizlerle paylaşmak için
+          hazırladığımız program.
+        </p>
 
-      <div className="mx-auto max-w-2xl space-y-4">
-        {wedding.schedule.map((item, index) => {
-          const Icon = icons[index] ?? Clock
-          const isLast = index === wedding.schedule.length - 1
+        <div className="grid gap-5 lg:grid-cols-2 lg:gap-6">
+          {wedding.schedule.map((item, index) => {
+            const Icon = icons[index] ?? Clock
 
-          return (
-            <Reveal key={item.time} delay={index * 0.06}>
-              <div className="relative flex gap-0">
-                {/* Timeline column */}
-                <div className="flex w-14 shrink-0 flex-col items-center sm:w-16">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full border border-accent bg-white shadow-sm sm:h-11 sm:w-11">
-                    <Icon className="h-4 w-4 text-accent sm:h-[18px] sm:w-[18px]" />
+            return (
+              <Reveal key={item.time} delay={index * 0.05}>
+                <article className="card-soft group flex h-full flex-col rounded-md border border-border bg-white p-6 transition hover:border-accent/50 sm:p-8">
+                  <div className="flex items-start gap-4">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-accent/30 bg-cream group-hover:border-accent sm:h-14 sm:w-14">
+                      <Icon className="h-5 w-5 text-accent" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex flex-wrap items-baseline justify-between gap-2">
+                        <h3 className="font-serif text-xl font-medium text-foreground sm:text-2xl">
+                          {item.title}
+                        </h3>
+                        <time className="font-serif text-lg font-medium tabular-nums text-accent sm:text-xl">
+                          {item.time}
+                        </time>
+                      </div>
+                      <p className="mt-4 font-serif text-base leading-relaxed text-muted">
+                        {item.description}
+                      </p>
+                    </div>
                   </div>
-                  {!isLast && (
-                    <div className="my-1 w-px flex-1 bg-border" />
-                  )}
-                </div>
-
-                {/* Card */}
-                <div className="mb-1 flex-1 rounded-sm border border-border bg-white p-5 shadow-sm sm:p-6">
-                  <div className="flex flex-wrap items-baseline justify-between gap-2">
-                    <h3 className="font-serif text-lg font-medium text-foreground sm:text-xl">
-                      {item.title}
-                    </h3>
-                    <span className="rounded-sm bg-cream-dark px-3 py-1 font-serif text-sm font-medium tabular-nums text-foreground">
-                      {item.time}
-                    </span>
-                  </div>
-
-                  <p className="mt-3 font-serif text-sm leading-relaxed text-muted sm:text-base">
-                    {item.description}
-                  </p>
-                </div>
-              </div>
-            </Reveal>
-          )
-        })}
+                </article>
+              </Reveal>
+            )
+          })}
+        </div>
       </div>
     </section>
   )

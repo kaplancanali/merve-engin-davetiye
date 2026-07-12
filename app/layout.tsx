@@ -16,33 +16,38 @@ const greatVibes = Great_Vibes({
   weight: '400',
 })
 
-const title = 'Merve & Engin | Dijital Davetiye'
+const title = 'Merve & Engin'
 const description =
-  'Merve & Engin düğün davetiyesi. 08 Ağustos 2026, Ankara Şeker Fabrikası Sosyal Tesisleri.'
+  'Sizi özel günümüze davet ediyoruz. Dijital davetiyeyi açmak için tıklayın.'
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? 'https://merve-engin-davetiye.vercel.app',
+  ),
   title,
   description,
   openGraph: {
-    title,
-    description,
+    title: 'Merve & Engin',
+    description:
+      'Sizi özel günümüze davet ediyoruz. Davetiyeyi açmak için tıklayın.',
     type: 'website',
     locale: 'tr_TR',
-    siteName: 'Merve & Engin Düğün Davetiyesi',
+    siteName: 'Dijital Davetiye',
     images: [
       {
-        url: '/floral-bouquet.png',
+        url: '/og-preview.png',
         width: 1200,
         height: 630,
-        alt: 'Merve & Engin Düğün Davetiyesi',
+        alt: 'Merve & Engin — Davetlisiniz',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title,
-    description,
-    images: ['/floral-bouquet.png'],
+    title: 'Merve & Engin',
+    description:
+      'Sizi özel günümüze davet ediyoruz. Davetiyeyi açmak için tıklayın.',
+    images: ['/og-preview.png'],
   },
 }
 

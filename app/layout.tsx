@@ -17,8 +17,7 @@ const greatVibes = Great_Vibes({
 })
 
 const title = 'Merve & Engin'
-const description =
-  'Sizi özel günümüze davet ediyoruz. Dijital davetiyeyi açmak için tıklayın.'
+const description = 'Sizin için bir mesaj var. Açmak için tıklayın.'
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -28,25 +27,23 @@ export const metadata: Metadata = {
   description,
   openGraph: {
     title: 'Merve & Engin',
-    description:
-      'Sizi özel günümüze davet ediyoruz. Davetiyeyi açmak için tıklayın.',
+    description: 'Sizin için bir mesaj var. Açmak için tıklayın.',
     type: 'website',
     locale: 'tr_TR',
-    siteName: 'Dijital Davetiye',
+    siteName: 'Merve & Engin',
     images: [
       {
         url: '/og-preview.png',
         width: 1200,
         height: 630,
-        alt: 'Merve & Engin — Davetlisiniz',
+        alt: 'Merve & Engin',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Merve & Engin',
-    description:
-      'Sizi özel günümüze davet ediyoruz. Davetiyeyi açmak için tıklayın.',
+    description: 'Sizin için bir mesaj var. Açmak için tıklayın.',
     images: ['/og-preview.png'],
   },
 }
